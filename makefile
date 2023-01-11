@@ -2,10 +2,10 @@
 
 default: all
 
-all: edf-anonymize
+all: edf-anonymizer
 
-edf-anonymize: edf-anonymize.c
-	gcc -g -Wall edf-anonymize.c -o edf-anonymize
+edf-anonymize: edf-anonymizer.c
+	gcc -g -Wall edf-anonymizer.c -o edf-anonymizer
 
 clean: 
-	rm edf-anonymize
+	rm edf-anonymizer

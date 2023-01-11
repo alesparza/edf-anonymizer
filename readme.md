@@ -1,4 +1,4 @@
-# edf-anomyize
+# edf-anomyizer
 
 This program anonymizes an file in the European Data Format, you can read the specifications on the [web here](https://www.edfplus.info/specs/index.html).
 
