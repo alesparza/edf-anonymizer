@@ -26,7 +26,7 @@ void miniHexDump(char* filename) {
     exit(1);
   }
   printf("Printing header for %s\n", filename);
-  for (int i = 0; i < 15; i++) {
+  for (int i = 0; i < HEADER_LENGTH; i++) {
     printBinaryRow(i, file);
   }
 
