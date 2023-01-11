@@ -26,9 +26,7 @@ void miniHexDump(char* filename) {
     printf("Error opening file, is the filename correct? (tried %s)\n", filename);
     exit(1);
   }
-
   printf("Printing header for %s\n", filename);
-
   for (int i = 0; i < 15; i++) {
     printBinaryRow(i, file);
   }
@@ -41,25 +39,25 @@ void miniHexDump(char* filename) {
 
 int main(int argc, char **argv) {
 
-if (argc < 2) {
-  printf("Invalid number of arguments, need to provide the input file!\n");
-  exit(1);
-}
+  if (argc < 2) {
+    printf("Invalid number of arguments, need to provide the input file!\n");
+    exit(1);
+  }
 
-// setup the output file
-char* inputFileName = argv[1];
-miniHexDump(argv[1]);
-char* outputFileName = malloc(sizeof(char) * strlen(inputFileName) + FILENAME_LENGTH_EXTENSION);
-strcpy(outputFileName, inputFileName);
-char* extensionIndex = strstr(outputFileName, ".edf");
-if (extensionIndex == NULL) {
-  printf("Can't find .edf extension, unable to create output file\n");
-  exit(1);
-}
-strcpy(extensionIndex, "_deid.edf");
+  // setup the output file
+  char* inputFileName = argv[1];
+  miniHexDump(argv[1]);
+  char* outputFileName = malloc(sizeof(char) * strlen(inputFileName) + FILENAME_LENGTH_EXTENSION);
+  strcpy(outputFileName, inputFileName);
+  char* extensionIndex = strstr(outputFileName, ".edf");
+  if (extensionIndex == NULL) {
+    printf("Can't find .edf extension, unable to create output file\n");
+    exit(1);
+  }
+  strcpy(extensionIndex, "_deid.edf");
 
 
-printf("Set output filename to %s\n", outputFileName);
+  printf("Set output filename to %s\n", outputFileName);
 
 
   return 0;
