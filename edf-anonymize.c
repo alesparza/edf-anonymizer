@@ -37,12 +37,12 @@ void miniHexDump(char* filename) {
 char* setOutputFilename(char* inputFileName) {
   char* outputFileName = malloc(sizeof(char) * strlen(inputFileName) + strlen(DEID_FILE_SUFFIX));
   strcpy(outputFileName, inputFileName);
-  char* extensionIndex = strstr(outputFileName, ".edf");
+  char* extensionIndex = strstr(outputFileName, EDF_EXTENSION);
   if (extensionIndex == NULL) {
     printf("Can't find .edf extension, unable to create output file\n");
     exit(1);
   }
-  strcpy(extensionIndex, "_deid.edf");
+  strcpy(extensionIndex, DEID_EDF_EXTENSION);
 
 
   printf("Set output filename to %s\n", outputFileName);

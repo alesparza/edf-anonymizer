@@ -2,6 +2,8 @@
 #define EDFANONYMIZE_H
 
 #define DEID_FILE_SUFFIX "_deid"
+#define EDF_EXTENSION ".edf"
+#define DEID_EDF_EXTENSION "_deid.edf"
 #define HEADER_LENGTH 16
 
 /**
