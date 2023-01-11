@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#define FILENAME_LENGTH_EXTENSION 5
+#include "edf-anonymize.h"
 
 
 void printBinaryRow(int i, FILE* file) {
@@ -35,19 +34,8 @@ void miniHexDump(char* filename) {
   return;
 }
 
-
-
-int main(int argc, char **argv) {
-
-  if (argc < 2) {
-    printf("Invalid number of arguments, need to provide the input file!\n");
-    exit(1);
-  }
-
-  // setup the output file
-  char* inputFileName = argv[1];
-  miniHexDump(argv[1]);
-  char* outputFileName = malloc(sizeof(char) * strlen(inputFileName) + FILENAME_LENGTH_EXTENSION);
+char* setOutputFilename(char* inputFileName) {
+  char* outputFileName = malloc(sizeof(char) * strlen(inputFileName) + strlen(DEID_FILE_SUFFIX));
   strcpy(outputFileName, inputFileName);
   char* extensionIndex = strstr(outputFileName, ".edf");
   if (extensionIndex == NULL) {
@@ -58,6 +46,19 @@ int main(int argc, char **argv) {
 
 
   printf("Set output filename to %s\n", outputFileName);
+  return outputFileName;
+}
+
+int main(int argc, char **argv) {
+
+  if (argc < 2) {
+    printf("Invalid number of arguments, need to provide the input file!\n");
+    exit(1);
+  }
+
+  char* inputFileName = argv[1];
+  char* outputFileName = setOutputFilename(inputFileName);
+  miniHexDump(argv[1]);
 
 
   return 0;
