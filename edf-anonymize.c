@@ -39,6 +39,11 @@ void miniHexDump(char* filename) {
 
 int main(int argc, char **argv) {
 
+if (argc < 2) {
+  printf("Invalid number of arguments, need to provide the input file!\n");
+  exit(1);
+}
+
 miniHexDump(argv[1]);
 
 
