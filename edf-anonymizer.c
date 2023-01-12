@@ -42,7 +42,7 @@ char* setOutputFilename(char* inputFileName) {
     printf("Can't find .edf extension, unable to create output file\n");
     exit(1);
   }
-  strcpy(extensionIndex, DEID_EDF_EXTENSION);
+  strcpy(extensionIndex, DEID_EDF_EXTENSION);  // copies new extension to filename
 
   printf("Set output filename to %s\n", outputFileName);
   return outputFileName;
@@ -54,6 +54,7 @@ int main(int argc, char **argv) {
     exit(1);
   }
 
+  // setup file names
   char* inputFileName = argv[1];
   char* outputFileName = setOutputFilename(inputFileName);
   miniHexDump(argv[1]);
