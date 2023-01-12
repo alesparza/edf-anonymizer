@@ -46,12 +46,12 @@ int main(int argc, char **argv) {
   FILE* output = fopen(outputFileName, "wb");
 
   // copy the version
-  int version[8];
-  fread(version, 8, sizeof(char), input);
-  fwrite(version, 8, sizeof(char), output);
+  int version[VERSION_LENGTH];
+  fread(version, VERSION_LENGTH, sizeof(char), input);
+  fwrite(version, VERSION_LENGTH, sizeof(char), output);
 
   // write the local data
-  int buffer[1024];
+  int buffer[BUFFER_SIZE];
   memset(buffer, '\0', sizeof(buffer));
   fread(buffer, LOCAL_PATIENT_IDENFITICATION_LENGTH, sizeof(char), input);
   fwrite(newData, LOCAL_PATIENT_IDENFITICATION_LENGTH, sizeof(char), output);
