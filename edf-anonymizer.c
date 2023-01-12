@@ -39,7 +39,6 @@ int main(int argc, char **argv) {
       *(newData + i) = ' ';
     }
   }
-  printf("You entered: %s\n", newData);
   printf("Anonymizing file (this can take a bit for large files)");
   fflush(stdout);
 
