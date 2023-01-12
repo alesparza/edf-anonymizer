@@ -36,5 +36,19 @@ int main(int argc, char **argv) {
   *(newData + strlen(newData) - 1) = '\0'; // removing the \n
   printf("You entered: %s\n", newData);
 
+  FILE* input = fopen(inputFileName, "rb");
+  FILE* output = fopen(outputFileName, "wb");
+
+  // copy the version
+  char version[8];
+  fread(version, 8, sizeof(char), input);
+  fwrite(version, 8, sizeof(char), output);
+
+  // write the local data
+  char buffer[1024];
+  memset(buffer, '\0', sizeof(buffer));
+  fread(buffer, LOCAL_PATIENT_IDENFITICATION_LENGTH, sizeof(char), input);
+  fwrite(newData, LOCAL_PATIENT_IDENFITICATION_LENGTH, sizeof(char), output);
+
   return 0;
 }
