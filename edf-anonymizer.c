@@ -30,6 +30,7 @@ void miniHexDump(char* filename) {
     printBinaryRow(i, file);
   }
   printf("Done!\n");
+  fclose(file);
 
   return;
 }
