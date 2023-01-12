@@ -39,7 +39,7 @@ int main(int argc, char **argv) {
       *(newData + i) = ' ';
     }
   }
-  printf("Anonymizing file (this can take a bit for large files)");
+  printf("Anonymizing file (this can take a bit for large files)\n");
   fflush(stdout);
 
   FILE* input = fopen(inputFileName, "rb");
