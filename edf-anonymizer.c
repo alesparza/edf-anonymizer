@@ -6,7 +6,7 @@
 
 
 char* setOutputFilename(char* inputFileName) {
-  char* outputFileName = malloc(sizeof(char) * strlen(inputFileName) + strlen(DEID_FILE_SUFFIX));
+  char* outputFileName = malloc(sizeof(char) * (strlen(inputFileName) + strlen(DEID_FILE_SUFFIX) + 1));
   strcpy(outputFileName, inputFileName);
   char* extensionIndex = strstr(outputFileName, EDF_EXTENSION);
   if (extensionIndex == NULL) {
