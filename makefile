@@ -11,4 +11,4 @@ edf-anonymizer: edf-anonymizer.c mini-hexdump.o
 	gcc -g -Wall edf-anonymizer.c mini-hexdump.o -o edf-anonymizer
 
 clean: 
-	rm -f edf-anonymizer
+	rm -f edf-anonymizer *.o
