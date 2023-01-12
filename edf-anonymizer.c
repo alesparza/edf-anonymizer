@@ -2,38 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include "edf-anonymizer.h"
+#include "mini-hexdump.h"
 
-
-void printBinaryRow(int i, FILE* file) {
-  printf("%05d\t", i*10);
-  char data[18] = {0};
-  fgets(data, 17, file);
-  printf("| %s |\n", data);
-}
-
-void miniHexDump(char* filename) {
-  if (filename == NULL) {
-    printf("miniHexDump: invalid filename %s\n", filename);
-    exit(1);
-  }
-
-  printf("Reviewing file %s\n", filename);
-
-  FILE* file = fopen(filename, "rb");
-  if (file == NULL) {
-    printf("Error opening file, is the filename correct? (tried %s)\n", filename);
-    exit(1);
-  }
-
-  printf("Printing header for %s\n", filename);
-  for (int i = 0; i < HEADER_LENGTH; i++) {
-    printBinaryRow(i, file);
-  }
-  printf("Done!\n");
-  fclose(file);
-
-  return;
-}
 
 char* setOutputFilename(char* inputFileName) {
   char* outputFileName = malloc(sizeof(char) * strlen(inputFileName) + strlen(DEID_FILE_SUFFIX));
@@ -58,7 +28,7 @@ int main(int argc, char **argv) {
   // setup file names
   char* inputFileName = argv[1];
   char* outputFileName = setOutputFilename(inputFileName);
-  miniHexDump(argv[1]);
+  miniHexDump(argv[1], HEADER_LENGTH);
 
   return 0;
 }

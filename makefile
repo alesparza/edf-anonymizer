@@ -4,8 +4,11 @@ default: all
 
 all: edf-anonymizer
 
-edf-anonymize: edf-anonymizer.c
-	gcc -g -Wall edf-anonymizer.c -o edf-anonymizer
+mini-hexdump.o: mini-hexdump.c
+	gcc -g -Wall -c mini-hexdump.c -o mini-hexdump.o
+
+edf-anonymizer: edf-anonymizer.c mini-hexdump.o
+	gcc -g -Wall edf-anonymizer.c mini-hexdump.o -o edf-anonymizer
 
 clean: 
-	rm edf-anonymizer
+	rm -f edf-anonymizer
