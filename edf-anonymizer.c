@@ -68,7 +68,6 @@ int main(int argc, char **argv) {
   fclose(input);
   fclose(output);
   printf("Done writing the output file %s\n", outputFileName);
-  printf("Checking the output file header contents:\n");
   miniHexDump(outputFileName, HEADER_LENGTH);
 
   free(outputFileName);
