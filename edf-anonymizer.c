@@ -40,20 +40,35 @@ int main(int argc, char **argv) {
     }
   }
   printf("You entered: %s\n", newData);
+  printf("Anonymizing file (this can take a bit for large files)");
 
   FILE* input = fopen(inputFileName, "rb");
   FILE* output = fopen(outputFileName, "wb");
 
   // copy the version
-  char version[8];
+  int version[8];
   fread(version, 8, sizeof(char), input);
   fwrite(version, 8, sizeof(char), output);
 
   // write the local data
-  char buffer[1024];
+  int buffer[1024];
   memset(buffer, '\0', sizeof(buffer));
   fread(buffer, LOCAL_PATIENT_IDENFITICATION_LENGTH, sizeof(char), input);
   fwrite(newData, LOCAL_PATIENT_IDENFITICATION_LENGTH, sizeof(char), output);
+
+  // write the rest of the original file
+  memset(buffer, '\0', sizeof(buffer));
+  while ((fread(buffer, sizeof(buffer), sizeof(char), input)) != 0) {
+    fwrite(buffer, sizeof(buffer), sizeof(char), output);
+    memset(buffer, '\0', sizeof(buffer));
+  }
+
+
+  fclose(input);
+  fclose(output);
+  printf("Done writing the output file %s\n", outputFileName);
+  printf("Checking the output file header contents:\n");
+  miniHexDump(outputFileName, HEADER_LENGTH);
 
   return 0;
 }
