@@ -55,6 +55,7 @@ int main(int argc, char **argv) {
   memset(buffer, '\0', sizeof(buffer));
   fread(buffer, LOCAL_PATIENT_IDENFITICATION_LENGTH, sizeof(char), input);
   fwrite(newData, LOCAL_PATIENT_IDENFITICATION_LENGTH, sizeof(char), output);
+  free(newData);
 
   // write the rest of the original file
   memset(buffer, '\0', sizeof(buffer));
@@ -69,6 +70,8 @@ int main(int argc, char **argv) {
   printf("Done writing the output file %s\n", outputFileName);
   printf("Checking the output file header contents:\n");
   miniHexDump(outputFileName, HEADER_LENGTH);
+
+  free(outputFileName);
 
   return 0;
 }
