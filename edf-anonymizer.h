@@ -5,6 +5,7 @@
 #define EDF_EXTENSION ".edf"
 #define DEID_EDF_EXTENSION "_deid.edf"
 #define HEADER_LENGTH 16
+#define LOCAL_PATIENT_IDENFITICATION_LENGTH 80
 
 /**
 * Sets the output filename.

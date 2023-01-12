@@ -32,7 +32,7 @@ int main(int argc, char **argv) {
 
   printf("Please enter replacement data for Local Patient Identification (80 character max): ");
   char* newData = calloc(81, sizeof(char));
-  fgets(newData, 80, stdin);
+  fgets(newData, LOCAL_PATIENT_IDENFITICATION_LENGTH, stdin);
   *(newData + strlen(newData) - 1) = '\0'; // removing the \n
   printf("You entered: %s\n", newData);
 
