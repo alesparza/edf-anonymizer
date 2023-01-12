@@ -34,6 +34,11 @@ int main(int argc, char **argv) {
   char* newData = calloc(81, sizeof(char));
   fgets(newData, LOCAL_PATIENT_IDENFITICATION_LENGTH, stdin);
   *(newData + strlen(newData) - 1) = '\0'; // removing the \n
+  for (int i = 0; i < LOCAL_PATIENT_IDENFITICATION_LENGTH; i++) {
+    if (*(newData + i) == '\0') {
+      *(newData + i) = ' ';
+    }
+  }
   printf("You entered: %s\n", newData);
 
   FILE* input = fopen(inputFileName, "rb");
