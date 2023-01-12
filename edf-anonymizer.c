@@ -30,5 +30,11 @@ int main(int argc, char **argv) {
   char* outputFileName = setOutputFilename(inputFileName);
   miniHexDump(argv[1], HEADER_LENGTH);
 
+  printf("Please enter replacement data for Local Patient Identification (80 character max): ");
+  char* newData = calloc(81, sizeof(char));
+  fgets(newData, 80, stdin);
+  *(newData + strlen(newData) - 1) = '\0'; // removing the \n
+  printf("You entered: %s\n", newData);
+
   return 0;
 }
