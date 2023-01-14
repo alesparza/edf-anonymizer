@@ -87,13 +87,62 @@ int main(int argc, char **argv) {
   miniHexDump(inputFileName, HEADER_LENGTH);
 
   // Start anonymizing the data
-  char* newData = calloc(81, sizeof(char));
+  char* newData = calloc(LOCAL_PATIENT_IDENFITICATION_LENGTH + 1, sizeof(char));
 
   // Detail Mode; ask for each field
   if (isDetail) {
-    //TODO: actuall implement this
-    printf("Detail Mode not implemented, sorry\n");
-    exit(1);
+    char* patientID = calloc(BUFFER_SIZE, sizeof(char));
+    char* patientSex = calloc(BUFFER_SIZE, sizeof(char));
+    char* patientDOB = calloc(BUFFER_SIZE, sizeof(char));
+    char* patientName = calloc(BUFFER_SIZE, sizeof(char));
+    char* tempBuffer = calloc(BUFFER_SIZE * 4, sizeof(char));
+    //TODO: actually implement this
+    printf("Please enter a response for the following four questions.  Press enter if unknown or not used\n");
+    printf("Please enter the patient ID: ");
+    fgets(patientID, BUFFER_SIZE, stdin);
+
+    // check if user pressed enter, if so, write "X ", otherwise just remove the last \n
+    if (*patientID == '\n') {
+      *patientID = 'X';
+      *(patientID + 1) = ' ';
+    } else {
+      *(patientID + strlen(patientID) - 1) = ' ';
+    }
+
+    printf("Please enter the patient sex: ");
+    fgets(patientSex, BUFFER_SIZE, stdin);
+    if (*patientSex == '\n') {
+      *patientSex = 'X';
+      *(patientSex + 1) = ' ';
+    } else {
+      *(patientSex + strlen(patientSex) - 1) = ' ';
+    }
+
+    printf("Please enter patient date of birth in dd-MMM-yyyy format (e.g. 02-MAR-2001): ");
+    fgets(patientDOB, BUFFER_SIZE, stdin);
+    if (*patientDOB == '\n') {
+      *patientDOB = 'X';
+      *(patientDOB + 1) = ' ';
+    } else {
+      *(patientDOB + strlen(patientDOB) - 1) = ' ';
+    }
+
+    printf("Please enter patient name: ");
+    fgets(patientName, BUFFER_SIZE, stdin);
+    if (*patientName == '\n') {
+      *patientName = 'X';
+      *(patientName + 1) = '\0';
+    } else {
+      *(patientName + strlen(patientName) - 1) = '\0';
+    }
+
+    strcat(tempBuffer, patientID);
+    strcat(tempBuffer, patientSex);
+    strcat(tempBuffer, patientDOB);
+    strcat(tempBuffer, patientName);
+    strncat(newData, tempBuffer, LOCAL_PATIENT_IDENFITICATION_LENGTH + 1);
+    //TODO: fill remaining characters (80 - strlen(newData)) with 0x20
+
   } else {
     // Simple Mode; single prompt for the entire field
     printf("Please enter replacement data for Local Patient Identification (80 character max): ");
