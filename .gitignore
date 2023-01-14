@@ -1,3 +1,4 @@
 *.o
 edf-anonymizer
 *.edf
+*.exe
