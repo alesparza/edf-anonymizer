@@ -5,9 +5,11 @@
 #include "mini-hexdump.h"
 
 void printHelp() {
-  printf("Usage: edf-anonymizer [-h] | [-i]\n");
+  printf("Usage: edf-anonymizer [-h] | [-i filename] [-d|-s]\n");
   printf("\t-h:  Print this help message\n");
-  printf("\t-i:  input file name.  The expected format is .edf\n");
+  printf("\t-d:  Enable Detail Mode.  Prompt for the four local patient identification fields\n");
+  printf("\t-s:  Enable Simple Mode.  Single prompt for the local patient identification (default)\n");
+  printf("\t-i filename:  input file name.  The expected format is .edf\n");
 }
 
 char* getInputName() {
@@ -40,6 +42,8 @@ int main(int argc, char **argv) {
   }
 
   char* inputFileName = NULL;
+  int isSimple = 0;
+  int isDetail = 0;
 
   for (int i = 0; i < argc; i++) {
     if (strcmp("-i", argv[i]) == 0) {
@@ -49,12 +53,29 @@ int main(int argc, char **argv) {
         exit(1);
       }
       inputFileName = argv[i];
+      continue;
     }
 
     if (strcmp("-h", argv[i]) == 0) {
       printHelp();
       exit(1);
     }
+
+    if (strcmp("-d", argv[i]) == 0) {
+      isDetail = 1;
+      continue;
+    }
+
+    if (strcmp("-s", argv[i]) == 0) {
+      isSimple = 1;
+      continue;
+    }
+  }
+
+  if (isSimple && isDetail) {
+    printf("Cannot request Simple and Detail mode\n");
+    printHelp();
+    exit(1);
   }
 
   if (inputFileName == NULL) {
@@ -65,14 +86,23 @@ int main(int argc, char **argv) {
   char* outputFileName = setOutputFilename(inputFileName);
   miniHexDump(inputFileName, HEADER_LENGTH);
 
-  // anonymize the data
-  printf("Please enter replacement data for Local Patient Identification (80 character max): ");
+  // Start anonymizing the data
   char* newData = calloc(81, sizeof(char));
-  fgets(newData, LOCAL_PATIENT_IDENFITICATION_LENGTH, stdin);
-  *(newData + strlen(newData) - 1) = '\0'; // removing the \n
-  for (int i = 0; i < LOCAL_PATIENT_IDENFITICATION_LENGTH; i++) {
-    if (*(newData + i) == '\0') {
-      *(newData + i) = ' ';
+
+  // Detail Mode; ask for each field
+  if (isDetail) {
+    //TODO: actuall implement this
+    printf("Detail Mode not implemented, sorry\n");
+    exit(1);
+  } else {
+    // Simple Mode; single prompt for the entire field
+    printf("Please enter replacement data for Local Patient Identification (80 character max): ");
+    fgets(newData, LOCAL_PATIENT_IDENFITICATION_LENGTH, stdin);
+    *(newData + strlen(newData) - 1) = '\0'; // removing the \n
+    for (int i = 0; i < LOCAL_PATIENT_IDENFITICATION_LENGTH; i++) {
+      if (*(newData + i) == '\0') {
+        *(newData + i) = ' ';
+      }
     }
   }
   printf("Anonymizing file (this can take a bit for large files)\n");
