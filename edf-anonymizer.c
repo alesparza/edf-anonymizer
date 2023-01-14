@@ -5,14 +5,20 @@
 #include "mini-hexdump.h"
 
 void printHelp() {
-  printf("Usage:\tedf-anonymizer -h\n");
+  printf("Usage:\tedf-anonymizer [-h|-H]\n");
   printf("\tedf-anonymizer [-d|-s] [-r] [-i filename]\n");
   printf("\n");
   printf("\t-h:  Print this help message\n");
+  printf("\t-H:  Print a more verbose help message\n");
   printf("\t-d:  Enable Detail Mode.  Prompt for the four local patient identification fields\n");
   printf("\t-s:  Enable Simple Mode.  Single prompt for the local patient identification (default)\n");
   printf("\t-r:  Review Mode.  Do not anonymize data, just print the header\n");
   printf("\t-i filename:  input file name.  The expected format is .edf\n");
+}
+
+void printVerboseHelp() {
+  printf("Verbose Help Message not configured.  Here's the short version.\n");
+  printHelp();
 }
 
 char* getInputName() {
@@ -63,6 +69,11 @@ int main(int argc, char **argv) {
 
     if (strcmp("-h", argv[i]) == 0) {
       printHelp();
+      exit(1);
+    }
+
+    if (strcmp("-H", argv[i]) == 0) {
+      printVerboseHelp();
       exit(1);
     }
 

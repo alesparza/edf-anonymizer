@@ -17,6 +17,12 @@
 void printHelp();
 
 /**
+* Prints a verbose help message for how to use this program.
+*/
+void printVerboseHelp();
+
+
+/**
 * Gets the input file name from the user
 */
 char* getInputName();
