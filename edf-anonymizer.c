@@ -43,6 +43,10 @@ int main(int argc, char **argv) {
   for (int i = 0; i < argc; i++) {
     if (strcmp("-i", argv[i]) == 0) {
       i++;
+      if (argv[i] == NULL) {
+        printHelp();
+        exit(1);
+      }
       inputFileName = argv[i];
     }
   }
