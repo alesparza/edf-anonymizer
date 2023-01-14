@@ -65,6 +65,7 @@ int main(int argc, char **argv) {
   char* outputFileName = setOutputFilename(inputFileName);
   miniHexDump(inputFileName, HEADER_LENGTH);
 
+  // anonymize the data
   printf("Please enter replacement data for Local Patient Identification (80 character max): ");
   char* newData = calloc(81, sizeof(char));
   fgets(newData, LOCAL_PATIENT_IDENFITICATION_LENGTH, stdin);
