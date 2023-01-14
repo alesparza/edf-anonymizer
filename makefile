@@ -9,15 +9,15 @@ default: all
 all: edf-anonymizer
 
 %.o: %.c
-	@echo Generating object files...
-	$(CC) $(CFLAGS) -c $< -o $@
+	@echo Generating object file $@...
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 edf-anonymizer: $(OBJECTS)
-	@echo Compiling edf-anonymizer...
-	$(CC) $(CFLAGS) $^ -o $@
+	@echo Compiling $@...
+	@$(CC) $(CFLAGS) $^ -o $@
 	@echo Done!
 
 clean:
 	@echo Cleaning files...
-	rm -f *.o edf-anonymizer EDF-anonymizer.exe
+	@rm -f *.o edf-anonymizer EDF-anonymizer.exe
 	@echo Done!
