@@ -5,7 +5,9 @@
 #include "mini-hexdump.h"
 
 void printHelp() {
-  printf("Usage: edf-anonymizer [-h] | [-i filename] [-d|-s]\n");
+  printf("Usage:\tedf-anonymizer -h\n");
+  printf("\tedf-anonymizer [-d|-s] [-i filename]\n");
+  printf("\n");
   printf("\t-h:  Print this help message\n");
   printf("\t-d:  Enable Detail Mode.  Prompt for the four local patient identification fields\n");
   printf("\t-s:  Enable Simple Mode.  Single prompt for the local patient identification (default)\n");
