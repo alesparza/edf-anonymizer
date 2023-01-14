@@ -5,7 +5,7 @@
 #include "mini-hexdump.h"
 
 void printHelp() {
-  printf("Usage:\tedf-anonymizer [-h|-H]\n");
+  printf("Usage:\tedf-anonymizer -h|-H\n");
   printf("\tedf-anonymizer [-d|-s] [-r] [-i filename]\n");
   printf("\n");
   printf("\t-h:  Print this help message\n");
