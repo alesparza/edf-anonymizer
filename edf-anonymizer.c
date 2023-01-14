@@ -164,8 +164,14 @@ int main(int argc, char **argv) {
     strcat(tempBuffer, patientSex);
     strcat(tempBuffer, patientDOB);
     strcat(tempBuffer, patientName);
+    int len = strlen(tempBuffer);
+
+    // ensure the temp buffer has the appropriate length
+    for (int i = len; i < LOCAL_PATIENT_IDENFITICATION_LENGTH; i++) {
+      *(tempBuffer + i) = ' ';
+    }
     strncat(newData, tempBuffer, LOCAL_PATIENT_IDENFITICATION_LENGTH + 1);
-    //TODO: fill remaining characters (80 - strlen(newData)) with 0x20
+
 
   } else {
     // Simple Mode; single prompt for the entire field
