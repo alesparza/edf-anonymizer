@@ -5,8 +5,9 @@
 #include "mini-hexdump.h"
 
 void printHelp() {
-  printf("Usage: edf-anonymizer [-i]\n");
-  printf("\t-i: input file name.  The expected format is .edf\n");
+  printf("Usage: edf-anonymizer [-h] | [-i]\n");
+  printf("\t-h:  Print this help message\n");
+  printf("\t-i:  input file name.  The expected format is .edf\n");
 }
 
 char* getInputName() {
@@ -48,6 +49,11 @@ int main(int argc, char **argv) {
         exit(1);
       }
       inputFileName = argv[i];
+    }
+
+    if (strcmp("-h", argv[i]) == 0) {
+      printHelp();
+      exit(1);
     }
   }
 
