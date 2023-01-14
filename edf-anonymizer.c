@@ -4,6 +4,18 @@
 #include "edf-anonymizer.h"
 #include "mini-hexdump.h"
 
+void printHelp() {
+  printf("Usage: edf-anonymizer [-i]\n");
+  printf("\t-i: input file name.  The expected format is .edf\n");
+}
+
+char* getInputName() {
+  char* input = calloc(BUFFER_SIZE , sizeof(char));
+  printf("Please enter the input file name: ");
+  fgets(input, BUFFER_SIZE, stdin);
+  input[strlen(input) - 1] = '\0';
+  return input;
+}
 
 char* setOutputFilename(char* inputFileName) {
   char* outputFileName = malloc(sizeof(char) * (strlen(inputFileName) + strlen(DEID_FILE_SUFFIX) + 1));
@@ -20,15 +32,28 @@ char* setOutputFilename(char* inputFileName) {
 }
 
 int main(int argc, char **argv) {
+  // handle arguments
   if (argc < MINIMUM_ARGUMENTS) {
-    printf("Invalid number of arguments, need to provide the input file!\n");
+    printHelp();
     exit(1);
   }
 
+  char* inputFileName = NULL;
+
+  for (int i = 0; i < argc; i++) {
+    if (strcmp("-i", argv[i]) == 0) {
+      i++;
+      inputFileName = argv[i];
+    }
+  }
+
+  if (inputFileName == NULL) {
+    inputFileName = getInputName();
+  }
+
   // setup file names
-  char* inputFileName = argv[1];
   char* outputFileName = setOutputFilename(inputFileName);
-  miniHexDump(argv[1], HEADER_LENGTH);
+  miniHexDump(inputFileName, HEADER_LENGTH);
 
   printf("Please enter replacement data for Local Patient Identification (80 character max): ");
   char* newData = calloc(81, sizeof(char));
