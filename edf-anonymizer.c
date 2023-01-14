@@ -20,7 +20,7 @@ char* setOutputFilename(char* inputFileName) {
 }
 
 int main(int argc, char **argv) {
-  if (argc < 2) {
+  if (argc < MINIMUM_ARGUMENTS) {
     printf("Invalid number of arguments, need to provide the input file!\n");
     exit(1);
   }
