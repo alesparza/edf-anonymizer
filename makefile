@@ -1,4 +1,6 @@
-CC = gcc
+CC := gcc # NTS overwrite with x86_64-w64-mingw32-gcc to cross-compile to 64bit Windows
+CFLAGS := -g -Wall
+OBJECTS := mini-hexdump.o edf-anonymizer.o
 
 .PHONY: all clean
 
@@ -6,11 +8,16 @@ default: all
 
 all: edf-anonymizer
 
-mini-hexdump.o: mini-hexdump.c
-	$(CC) -g -Wall -c mini-hexdump.c -o mini-hexdump.o
+%.o: %.c
+	@echo Generating object files...
+	$(CC) $(CFLAGS) -c $< -o $@
 
-edf-anonymizer: edf-anonymizer.c mini-hexdump.o
-	$(CC) -g -Wall edf-anonymizer.c mini-hexdump.o -o edf-anonymizer
+edf-anonymizer: $(OBJECTS)
+	@echo Compiling edf-anonymizer...
+	$(CC) $(CFLAGS) $^ -o $@
+	@echo Done!
 
-clean: 
-	rm -f edf-anonymizer *.o
+clean:
+	@echo Cleaning files...
+	rm -f *.o edf-anonymizer EDF-anonymizer.exe
+	@echo Done!
