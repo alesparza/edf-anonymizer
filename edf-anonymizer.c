@@ -6,11 +6,12 @@
 
 void printHelp() {
   printf("Usage:\tedf-anonymizer -h\n");
-  printf("\tedf-anonymizer [-d|-s] [-i filename]\n");
+  printf("\tedf-anonymizer [-d|-s] [-r] [-i filename]\n");
   printf("\n");
   printf("\t-h:  Print this help message\n");
   printf("\t-d:  Enable Detail Mode.  Prompt for the four local patient identification fields\n");
   printf("\t-s:  Enable Simple Mode.  Single prompt for the local patient identification (default)\n");
+  printf("\t-r:  Review Mode.  Do not anonymize data, just print the header\n");
   printf("\t-i filename:  input file name.  The expected format is .edf\n");
 }
 
@@ -46,8 +47,10 @@ int main(int argc, char **argv) {
   char* inputFileName = NULL;
   int isSimple = 0;
   int isDetail = 0;
+  int isReview = 0;
 
   for (int i = 0; i < argc; i++) {
+    //TODO: switch to switch block
     if (strcmp("-i", argv[i]) == 0) {
       i++;
       if (argv[i] == NULL) {
@@ -61,6 +64,11 @@ int main(int argc, char **argv) {
     if (strcmp("-h", argv[i]) == 0) {
       printHelp();
       exit(1);
+    }
+
+    if (strcmp("-r", argv[i]) == 0) {
+      isReview = 1;
+      continue;
     }
 
     if (strcmp("-d", argv[i]) == 0) {
@@ -84,11 +92,14 @@ int main(int argc, char **argv) {
     inputFileName = getInputName();
   }
 
-  // setup file names
-  char* outputFileName = setOutputFilename(inputFileName);
+  // print the current headers, exit immediately if in Review Mode
   miniHexDump(inputFileName, HEADER_LENGTH);
+  if (isReview) {
+    exit(0);
+  }
 
   // Start anonymizing the data
+  char* outputFileName = setOutputFilename(inputFileName);
   char* newData = calloc(LOCAL_PATIENT_IDENFITICATION_LENGTH + 1, sizeof(char));
 
   // Detail Mode; ask for each field
