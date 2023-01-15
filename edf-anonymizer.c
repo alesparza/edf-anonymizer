@@ -143,7 +143,7 @@ int main(int argc, char **argv) {
 
   // Start anonymizing the data
   char* outputFileName = setOutputFilename(inputFileName);
-  char* newData = calloc(LOCAL_PATIENT_IDENFITICATION_LENGTH + 1, sizeof(char));
+  char* newData = calloc(BUFFER_SIZE, sizeof(char));
 
   // Detail Mode; ask for each field individually
   if (isDetail) {
@@ -174,14 +174,22 @@ int main(int argc, char **argv) {
   } else {
     // Simple Mode; single prompt for the entire field
     printf("Please enter replacement data for Local Patient Identification (80 character max): ");
-    fgets(newData, LOCAL_PATIENT_IDENFITICATION_LENGTH, stdin); //TODO: print error if too long
-    *(newData + strlen(newData) - 1) = '\0'; // removing the \n
-    for (int i = 0; i < LOCAL_PATIENT_IDENFITICATION_LENGTH; i++) {
+    fgets(newData, BUFFER_SIZE - 1, stdin);
+    checkLength(newData);
+    // remove the \n if it exists
+    int index = strlen(newData) - 1;
+    if (*(newData + index) == '\n') {
+      *(newData + index) = ' ';
+    }
+
+    for (int i = 0; i < LOCAL_PATIENT_IDENFITICATION_LENGTH + 1; i++) {
       if (*(newData + i) == '\0') {
         *(newData + i) = ' ';
       }
     }
+    *(newData + BUFFER_SIZE - 1) = '\0'; // ensure there is a NULL terminator
   }
+
   printf("Anonymizing file (this can take a bit for large files)\n");
   fflush(stdout);
 
