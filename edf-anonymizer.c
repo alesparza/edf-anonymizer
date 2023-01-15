@@ -45,18 +45,21 @@ char* setOutputFilename(char* inputFileName) {
 
 char* appendPromptResponse(char* currentResponse) {
   char* response = calloc(BUFFER_SIZE, sizeof(char));
-  fgets(response, BUFFER_SIZE, stdin);
+  fgets(response, BUFFER_SIZE - 1, stdin);
 
   // set the response to "X " if no entry, otherwise just drop the \n
   if (*response == '\n') {
     *response = 'X';
-    *(response + 1) = ' ';
+    *(response + 1) = ' '; //TODO: remove this
   } else {
     *(response + strlen(response) - 1) = ' ';
   }
 
+  //TODO: convert spaces to underscores
+
   // append to the current response contents
   strncat(currentResponse, response, strlen(response) + 1);
+  //TODO: write a space after the response
   free(response);
 
   return currentResponse;
