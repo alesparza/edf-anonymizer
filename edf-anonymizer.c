@@ -163,6 +163,11 @@ int main(int argc, char **argv) {
       *(tempBuffer + i) = ' ';
     }
     strncat(newData, tempBuffer, LOCAL_PATIENT_IDENFITICATION_LENGTH + 1);
+    free(patientID);
+    free(patientSex);
+    free(patientDOB);
+    free(patientName);
+    free(tempBuffer);
 
 
   } else {
@@ -207,6 +212,7 @@ int main(int argc, char **argv) {
   fclose(input);
   fclose(output);
   free(outputFileName);
+  free(inputFileName);
 
   return 0;
 }
