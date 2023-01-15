@@ -34,4 +34,11 @@ char* getInputName();
 */
 char* setOutputFilename(char* inputFileName);
 
+/*
+* Gets user prompt.
+*
+* If user presses enter without data, returns "X ".
+*/
+char* getPromptResponse();
+
 #endif /* EDFANONYMIZE_H */

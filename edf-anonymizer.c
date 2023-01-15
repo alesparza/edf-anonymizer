@@ -43,6 +43,20 @@ char* setOutputFilename(char* inputFileName) {
   return outputFileName;
 }
 
+char* getPromptResponse() {
+  char* response = calloc(BUFFER_SIZE, sizeof(char));
+  fgets(response, BUFFER_SIZE, stdin);
+
+  // set the response to "X " if no entry, otherwise just drop the \n
+  if (*response == '\n') {
+    *response = 'X';
+    *(response + 1) = ' ';
+  } else {
+    *(response + strlen(response) - 1) = ' ';
+  }
+  return response;
+}
+
 int main(int argc, char **argv) {
   if (argc < MINIMUM_ARGUMENTS) {
     printHelp();
@@ -118,49 +132,25 @@ int main(int argc, char **argv) {
 
   // Detail Mode; ask for each field individually
   if (isDetail) {
-    char* patientID = calloc(BUFFER_SIZE, sizeof(char));
-    char* patientSex = calloc(BUFFER_SIZE, sizeof(char));
-    char* patientDOB = calloc(BUFFER_SIZE, sizeof(char));
-    char* patientName = calloc(BUFFER_SIZE, sizeof(char));
+    char* patientID;
+    char* patientSex;
+    char* patientDOB;
+    char* patientName;
     char* tempBuffer = calloc(BUFFER_SIZE * 4, sizeof(char));
     printf("Please enter a response for the following four questions.  Press enter if unknown or not used\n");
 
     // for each prompt, check if user pressed enter, if so, write "X ", otherwise just remove the last \n
     printf("Please enter the patient ID: ");
-    fgets(patientID, BUFFER_SIZE, stdin);
-    if (*patientID == '\n') {
-      *patientID = 'X';
-      *(patientID + 1) = ' ';
-    } else {
-      *(patientID + strlen(patientID) - 1) = ' ';
-    }
+    patientID = getPromptResponse();
 
     printf("Please enter the patient sex: ");
-    fgets(patientSex, BUFFER_SIZE, stdin);
-    if (*patientSex == '\n') {
-      *patientSex = 'X';
-      *(patientSex + 1) = ' ';
-    } else {
-      *(patientSex + strlen(patientSex) - 1) = ' ';
-    }
+    patientSex = getPromptResponse();
 
     printf("Please enter patient date of birth in dd-MMM-yyyy format (e.g. 02-MAR-2001): ");
-    fgets(patientDOB, BUFFER_SIZE, stdin);
-    if (*patientDOB == '\n') {
-      *patientDOB = 'X';
-      *(patientDOB + 1) = ' ';
-    } else {
-      *(patientDOB + strlen(patientDOB) - 1) = ' ';
-    }
+    patientDOB = getPromptResponse();
 
     printf("Please enter patient name: ");
-    fgets(patientName, BUFFER_SIZE, stdin);
-    if (*patientName == '\n') {
-      *patientName = 'X';
-      *(patientName + 1) = '\0';
-    } else {
-      *(patientName + strlen(patientName) - 1) = '\0';
-    }
+    patientName = getPromptResponse();
 
     // put all the parts together, then ensure it is the right length and has spaces for empty bytes
     strcat(tempBuffer, patientID);
