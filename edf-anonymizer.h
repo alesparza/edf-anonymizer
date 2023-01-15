@@ -35,10 +35,12 @@ char* getInputName();
 char* setOutputFilename(char* inputFileName);
 
 /*
-* Gets user prompt.
+* Gets user prompt, then appends to a current response.
 *
 * If user presses enter without data, returns "X ".
+*
+* The current response should be large enough to hold the user input.
 */
-char* getPromptResponse();
+char* appendPromptResponse(char* currentResponse);
 
 #endif /* EDFANONYMIZE_H */

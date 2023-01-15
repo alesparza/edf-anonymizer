@@ -43,7 +43,7 @@ char* setOutputFilename(char* inputFileName) {
   return outputFileName;
 }
 
-char* getPromptResponse() {
+char* appendPromptResponse(char* currentResponse) {
   char* response = calloc(BUFFER_SIZE, sizeof(char));
   fgets(response, BUFFER_SIZE, stdin);
 
@@ -54,7 +54,12 @@ char* getPromptResponse() {
   } else {
     *(response + strlen(response) - 1) = ' ';
   }
-  return response;
+
+  // append to the current response contents
+  strncat(currentResponse, response, strlen(response) + 1);
+  free(response);
+
+  return currentResponse;
 }
 
 int main(int argc, char **argv) {
@@ -132,30 +137,21 @@ int main(int argc, char **argv) {
 
   // Detail Mode; ask for each field individually
   if (isDetail) {
-    char* response;
     char* tempBuffer = calloc(BUFFER_SIZE * 4, sizeof(char));
     printf("Please enter a response for the following four questions.  Press enter if unknown or not used\n");
 
     // for each prompt, check if user pressed enter, if so, write "X ", otherwise just remove the last \n
     printf("Please enter the patient ID: ");
-    response = getPromptResponse();
-    strcat(tempBuffer, response);
-    free(response);
+    appendPromptResponse(tempBuffer);
 
     printf("Please enter the patient sex: ");
-    response = getPromptResponse();
-    strcat(tempBuffer, response);
-    free(response);
+    appendPromptResponse(tempBuffer);
 
     printf("Please enter patient date of birth in dd-MMM-yyyy format (e.g. 02-MAR-2001): ");
-    response = getPromptResponse();
-    strcat(tempBuffer, response);
-    free(response);
+    appendPromptResponse(tempBuffer);
 
     printf("Please enter patient name: ");
-    response = getPromptResponse();
-    strcat(tempBuffer, response);
-    free(response);
+    appendPromptResponse(tempBuffer);
 
     int len = strlen(tempBuffer); // TODO: print message if length is too long
     for (int i = len; i < LOCAL_PATIENT_IDENFITICATION_LENGTH; i++) {
