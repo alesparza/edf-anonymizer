@@ -91,7 +91,9 @@ int main(int argc, char **argv) {
         printHelp();
         exit(1);
       }
-      inputFileName = argv[i];
+      char* tempName = calloc(BUFFER_SIZE, sizeof(char));
+      strncpy(tempName, argv[i], BUFFER_SIZE);
+      inputFileName = tempName;
       continue;
     }
 
