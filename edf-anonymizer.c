@@ -62,6 +62,14 @@ char* appendPromptResponse(char* currentResponse) {
   return currentResponse;
 }
 
+void checkLength(char* data) {
+  int len = strlen(data);
+  if (len > LOCAL_PATIENT_IDENFITICATION_LENGTH) {
+    printf("Warning: the length of your responses is longer than the allowed length\n");
+    printf("Only the first %d characters will be written to the file\n", LOCAL_PATIENT_IDENFITICATION_LENGTH);
+  }
+}
+
 int main(int argc, char **argv) {
   if (argc < MINIMUM_ARGUMENTS) {
     printHelp();
@@ -153,11 +161,11 @@ int main(int argc, char **argv) {
     printf("Please enter patient name: ");
     appendPromptResponse(tempBuffer);
 
-    int len = strlen(tempBuffer); // TODO: print message if length is too long
-    for (int i = len; i < LOCAL_PATIENT_IDENFITICATION_LENGTH; i++) {
+    checkLength(tempBuffer);
+    for (int i = strlen(tempBuffer); i < LOCAL_PATIENT_IDENFITICATION_LENGTH; i++) {
       *(tempBuffer + i) = ' ';
     }
-    strncat(newData, tempBuffer, LOCAL_PATIENT_IDENFITICATION_LENGTH + 1);
+    strncat(newData, tempBuffer, LOCAL_PATIENT_IDENFITICATION_LENGTH);
     free(tempBuffer);
 
 

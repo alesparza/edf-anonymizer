@@ -43,4 +43,11 @@ char* setOutputFilename(char* inputFileName);
 */
 char* appendPromptResponse(char* currentResponse);
 
+/**
+* Checks if the length of data is within the specifications.
+*
+* Prints a warning that the data will be truncated.
+*/
+void checkLength(char* data);
+
 #endif /* EDFANONYMIZE_H */
