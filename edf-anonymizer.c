@@ -176,18 +176,19 @@ int main(int argc, char **argv) {
     printf("Please enter replacement data for Local Patient Identification (80 character max): ");
     fgets(newData, BUFFER_SIZE - 1, stdin);
     checkLength(newData);
+
     // remove the \n if it exists
     int index = strlen(newData) - 1;
     if (*(newData + index) == '\n') {
       *(newData + index) = ' ';
     }
 
+    // replace NULLs from calloc with spaces, per specification
     for (int i = 0; i < LOCAL_PATIENT_IDENFITICATION_LENGTH + 1; i++) {
       if (*(newData + i) == '\0') {
         *(newData + i) = ' ';
       }
     }
-    *(newData + BUFFER_SIZE - 1) = '\0'; // ensure there is a NULL terminator
   }
 
   printf("Anonymizing file (this can take a bit for large files)\n");
