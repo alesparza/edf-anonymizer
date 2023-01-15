@@ -32,13 +32,13 @@ char* getInputName() {
 char* setOutputFilename(char* inputFileName) {
   // copy the current filename to the new buffer, then add the appropriate extension
   char* outputFileName = malloc(sizeof(char) * (strlen(inputFileName) + strlen(DEID_FILE_SUFFIX) + 1));
-  strncpy(outputFileName, inputFileName, strlen(inputFileName));
+  strncpy(outputFileName, inputFileName, strlen(inputFileName) + 1);
   char* extensionIndex = strstr(outputFileName, EDF_EXTENSION);
   if (extensionIndex == NULL) {
     printf("Can't find .edf extension, unable to create output file\n");
     exit(1);
   }
-  strncpy(extensionIndex, DEID_EDF_EXTENSION, strlen(DEID_EDF_EXTENSION));  // copies new extension to filename
+  strncpy(extensionIndex, DEID_EDF_EXTENSION, strlen(DEID_EDF_EXTENSION) + 1);  // copies new extension to filename
   printf("Set output filename to %s\n", outputFileName);
   return outputFileName;
 }
