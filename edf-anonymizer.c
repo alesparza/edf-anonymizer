@@ -132,41 +132,36 @@ int main(int argc, char **argv) {
 
   // Detail Mode; ask for each field individually
   if (isDetail) {
-    char* patientID;
-    char* patientSex;
-    char* patientDOB;
-    char* patientName;
+    char* response;
     char* tempBuffer = calloc(BUFFER_SIZE * 4, sizeof(char));
     printf("Please enter a response for the following four questions.  Press enter if unknown or not used\n");
 
     // for each prompt, check if user pressed enter, if so, write "X ", otherwise just remove the last \n
     printf("Please enter the patient ID: ");
-    patientID = getPromptResponse();
+    response = getPromptResponse();
+    strcat(tempBuffer, response);
+    free(response);
 
     printf("Please enter the patient sex: ");
-    patientSex = getPromptResponse();
+    response = getPromptResponse();
+    strcat(tempBuffer, response);
+    free(response);
 
     printf("Please enter patient date of birth in dd-MMM-yyyy format (e.g. 02-MAR-2001): ");
-    patientDOB = getPromptResponse();
+    response = getPromptResponse();
+    strcat(tempBuffer, response);
+    free(response);
 
     printf("Please enter patient name: ");
-    patientName = getPromptResponse();
-
-    // put all the parts together, then ensure it is the right length and has spaces for empty bytes
-    strcat(tempBuffer, patientID);
-    strcat(tempBuffer, patientSex);
-    strcat(tempBuffer, patientDOB);
-    strcat(tempBuffer, patientName);
+    response = getPromptResponse();
+    strcat(tempBuffer, response);
+    free(response);
 
     int len = strlen(tempBuffer); // TODO: print message if length is too long
     for (int i = len; i < LOCAL_PATIENT_IDENFITICATION_LENGTH; i++) {
       *(tempBuffer + i) = ' ';
     }
     strncat(newData, tempBuffer, LOCAL_PATIENT_IDENFITICATION_LENGTH + 1);
-    free(patientID);
-    free(patientSex);
-    free(patientDOB);
-    free(patientName);
     free(tempBuffer);
 
 
