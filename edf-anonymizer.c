@@ -33,7 +33,7 @@ char* getInputName() {
 void readStaticHeader(StaticHeader* header, FILE* input) {
   fread(header->version, HEADER_VERSION_LENGTH, sizeof(char), input);
   fread(header->localPatientIdentification, HEADER_LOCAL_PATIENT_IDENTIFICATION_LENGTH, sizeof(char), input);
-  fread(header->localRecordingIdentification, HEADER_RECORDING_PATIENT_IDENTIFICATION_LENGTH, sizeof(char), input);
+  fread(header->localRecordingIdentification, HEADER_LOCAL_RECORDING_IDENTIFICATION_LENGTH, sizeof(char), input);
   fread(header->startDate, HEADER_STARTDATE_RECORDING_LENGTH, sizeof(char), input);
   fread(header->startTime, HEADER_STARTTIME_RECORDING_LENGTH, sizeof(char), input);
   fread(header->totalBytes, HEADER_TOTAL_BYTES_LENGTH, sizeof(char), input);
