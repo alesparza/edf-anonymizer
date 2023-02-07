@@ -30,6 +30,19 @@ char* getInputName() {
   return input;
 }
 
+void readStaticHeader(StaticHeader* header, FILE* input) {
+  fread(header->version, HEADER_VERSION_LENGTH, sizeof(char), input);
+  fread(header->localPatientIdentification, HEADER_LOCAL_PATIENT_IDENTIFICATION_LENGTH, sizeof(char), input);
+  fread(header->localRecordingIdentification, HEADER_RECORDING_PATIENT_IDENTIFICATION_LENGTH, sizeof(char), input);
+  fread(header->startDate, HEADER_STARTDATE_RECORDING_LENGTH, sizeof(char), input);
+  fread(header->startTime, HEADER_STARTTIME_RECORDING_LENGTH, sizeof(char), input);
+  fread(header->totalBytes, HEADER_TOTAL_BYTES_LENGTH, sizeof(char), input);
+  fread(header->reserved, HEADER_RESERVED, sizeof(char), input);
+  fread(header->numDataRecords, HEADER_NUMBER_DATA_RECORDS_LENGTH, sizeof(char), input);
+  fread(header->dataDuration, HEADER_DATA_DURATION_LENGTH, sizeof(char), input);
+  fread(header->numSignals, HEADER_NUMBER_SIGNALS_LENGTH, sizeof(char), input);
+}
+
 char* setOutputFilename(char* inputFileName) {
   // copy the current filename to the new buffer, then add the appropriate extension
   char* outputFileName = malloc(sizeof(char) * (strlen(inputFileName) + strlen(DEID_FILE_SUFFIX) + 1));
