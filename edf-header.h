@@ -69,7 +69,7 @@
   * Initialise the static header.
   * Each field is initialised with spaces for the length of the field.
   */
-  DynamicHeader* initialiseDynamicHeader();
+  DynamicHeader* initialiseDynamicHeader(int signalCount);
 
   /**
   * Frees all the data in the static header.
