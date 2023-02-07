@@ -40,6 +40,7 @@ StaticHeader* freeStaticHeader(StaticHeader* staticHeader) {
   free(staticHeader->numDataRecords);
   free(staticHeader->dataDuration);
   free(staticHeader->numSignals);
+  free(staticHeader);
 
   return NULL;
 }
