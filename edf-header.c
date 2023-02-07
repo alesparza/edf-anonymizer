@@ -21,7 +21,7 @@ StaticHeader* initialiseStaticHeader() {
   header->reserved = malloc(HEADER_RESERVED * sizeof(char));
   memset(header->version, ' ', HEADER_RESERVED);
   header->numDataRecords = malloc(HEADER_NUMBER_DATA_RECORDS_LENGTH * sizeof(char));
-  memset(header->version, ' ', EADER_NUMBER_DATA_RECORDS_LENGTH);
+  memset(header->version, ' ', HEADER_NUMBER_DATA_RECORDS_LENGTH);
   header->dataDuration = malloc(HEADER_DATA_DURATION_LENGTH * sizeof(char));
   memset(header->version, ' ', HEADER_DATA_DURATION_LENGTH);
   header->numSignals = malloc(HEADER_NUMBER_SIGNALS_LENGTH * sizeof(char));
