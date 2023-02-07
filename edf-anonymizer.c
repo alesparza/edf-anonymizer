@@ -67,9 +67,9 @@ char* appendPromptResponse(char* currentResponse) {
 
 void checkLength(char* data) {
   int len = strlen(data);
-  if (len > LOCAL_PATIENT_IDENFITICATION_LENGTH) {
+  if (len > HEADER_LOCAL_PATIENT_IDENFITICATION_LENGTH) {
     printf("Warning: the length of your responses is longer than the allowed length\n");
-    printf("Only the first %d characters will be written to the file\n", LOCAL_PATIENT_IDENFITICATION_LENGTH);
+    printf("Only the first %d characters will be written to the file\n", HEADER_LOCAL_PATIENT_IDENFITICATION_LENGTH);
   }
 }
 
@@ -167,10 +167,10 @@ int main(int argc, char **argv) {
     appendPromptResponse(tempBuffer);
 
     checkLength(tempBuffer);
-    for (int i = strlen(tempBuffer); i < LOCAL_PATIENT_IDENFITICATION_LENGTH; i++) {
+    for (int i = strlen(tempBuffer); i < HEADER_LOCAL_PATIENT_IDENFITICATION_LENGTH; i++) {
       *(tempBuffer + i) = ' ';
     }
-    strncat(newData, tempBuffer, LOCAL_PATIENT_IDENFITICATION_LENGTH);
+    strncat(newData, tempBuffer, HEADER_LOCAL_PATIENT_IDENFITICATION_LENGTH);
     free(tempBuffer);
 
 
@@ -187,7 +187,7 @@ int main(int argc, char **argv) {
     }
 
     // replace NULLs from calloc with spaces, per specification
-    for (int i = 0; i < LOCAL_PATIENT_IDENFITICATION_LENGTH + 1; i++) {
+    for (int i = 0; i < HEADER_LOCAL_PATIENT_IDENFITICATION_LENGTH + 1; i++) {
       if (*(newData + i) == '\0') {
         *(newData + i) = ' ';
       }
@@ -201,15 +201,15 @@ int main(int argc, char **argv) {
   FILE* output = fopen(outputFileName, "wb");
 
   // copy the version; this is the only part before the patient info section
-  int version[VERSION_LENGTH];
-  fread(version, VERSION_LENGTH, sizeof(char), input);
-  fwrite(version, VERSION_LENGTH, sizeof(char), output);
+  int version[HEADER_VERSION_LENGTH];
+  fread(version, HEADER_VERSION_LENGTH, sizeof(char), input);
+  fwrite(version, HEADER_VERSION_LENGTH, sizeof(char), output);
 
   // write the local patient info data
   int buffer[BUFFER_SIZE];
   memset(buffer, '\0', sizeof(buffer));
-  fread(buffer, LOCAL_PATIENT_IDENFITICATION_LENGTH, sizeof(char), input);
-  fwrite(newData, LOCAL_PATIENT_IDENFITICATION_LENGTH, sizeof(char), output);
+  fread(buffer, HEADER_LOCAL_PATIENT_IDENFITICATION_LENGTH, sizeof(char), input);
+  fwrite(newData, HEADER_LOCAL_PATIENT_IDENFITICATION_LENGTH, sizeof(char), output);
   free(newData);
 
   // write the rest of the original file
