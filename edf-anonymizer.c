@@ -218,6 +218,9 @@ int main(int argc, char **argv) {
   FILE* input = fopen(inputFileName, "rb");
   FILE* output = fopen(outputFileName, "wb");
 
+  readStaticHeader(staticHeader, input);
+  rewind(input); // Necessary during testing since the pointer moves
+
   // copy the version; this is the only part before the patient info section
   int version[HEADER_VERSION_LENGTH];
   fread(version, HEADER_VERSION_LENGTH, sizeof(char), input);
