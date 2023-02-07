@@ -145,6 +145,10 @@ int main(int argc, char **argv) {
     exit(0);
   }
 
+  // Put the data into the header
+  StaticHeader* staticHeader = initialiseStaticHeader();
+  // TODO: read the header and update the internal fields.
+
   // Start anonymizing the data
   char* outputFileName = setOutputFilename(inputFileName);
   char* newData = calloc(BUFFER_SIZE, sizeof(char));
@@ -227,6 +231,7 @@ int main(int argc, char **argv) {
   fclose(output);
   free(outputFileName);
   free(inputFileName);
+  staticHeader = freeStaticHeader(staticHeader);
 
   return 0;
 }
