@@ -67,9 +67,9 @@ char* appendPromptResponse(char* currentResponse) {
 
 void checkLength(char* data) {
   int len = strlen(data);
-  if (len > HEADER_LOCAL_PATIENT_IDENFITICATION_LENGTH) {
+  if (len > HEADER_LOCAL_PATIENT_IDENTIFICATION_LENGTH) {
     printf("Warning: the length of your responses is longer than the allowed length\n");
-    printf("Only the first %d characters will be written to the file\n", HEADER_LOCAL_PATIENT_IDENFITICATION_LENGTH);
+    printf("Only the first %d characters will be written to the file\n", HEADER_LOCAL_PATIENT_IDENTIFICATION_LENGTH);
   }
 }
 
@@ -167,10 +167,10 @@ int main(int argc, char **argv) {
     appendPromptResponse(tempBuffer);
 
     checkLength(tempBuffer);
-    for (int i = strlen(tempBuffer); i < HEADER_LOCAL_PATIENT_IDENFITICATION_LENGTH; i++) {
+    for (int i = strlen(tempBuffer); i < HEADER_LOCAL_PATIENT_IDENTIFICATION_LENGTH; i++) {
       *(tempBuffer + i) = ' ';
     }
-    strncat(newData, tempBuffer, HEADER_LOCAL_PATIENT_IDENFITICATION_LENGTH);
+    strncat(newData, tempBuffer, HEADER_LOCAL_PATIENT_IDENTIFICATION_LENGTH);
     free(tempBuffer);
 
 
@@ -187,7 +187,7 @@ int main(int argc, char **argv) {
     }
 
     // replace NULLs from calloc with spaces, per specification
-    for (int i = 0; i < HEADER_LOCAL_PATIENT_IDENFITICATION_LENGTH + 1; i++) {
+    for (int i = 0; i < HEADER_LOCAL_PATIENT_IDENTIFICATION_LENGTH + 1; i++) {
       if (*(newData + i) == '\0') {
         *(newData + i) = ' ';
       }
@@ -208,8 +208,8 @@ int main(int argc, char **argv) {
   // write the local patient info data
   int buffer[BUFFER_SIZE];
   memset(buffer, '\0', sizeof(buffer));
-  fread(buffer, HEADER_LOCAL_PATIENT_IDENFITICATION_LENGTH, sizeof(char), input);
-  fwrite(newData, HEADER_LOCAL_PATIENT_IDENFITICATION_LENGTH, sizeof(char), output);
+  fread(buffer, HEADER_LOCAL_PATIENT_IDENTIFICATION_LENGTH, sizeof(char), input);
+  fwrite(newData, HEADER_LOCAL_PATIENT_IDENTIFICATION_LENGTH, sizeof(char), output);
   free(newData);
 
   // write the rest of the original file
