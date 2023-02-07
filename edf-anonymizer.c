@@ -139,7 +139,7 @@ int main(int argc, char **argv) {
   }
 
   // print the current headers, exit immediately if in Review Mode
-  miniHexDump(inputFileName, HEADER_LENGTH);
+  miniHexDump(inputFileName, HEADER_ROWS);
   if (isReview) {
     exit(0);
   }
@@ -221,7 +221,7 @@ int main(int argc, char **argv) {
   printf("Done writing the output file %s\n", outputFileName);
 
   // cleanup
-  miniHexDump(outputFileName, HEADER_LENGTH);
+  miniHexDump(outputFileName, HEADER_ROWS);
   fclose(input);
   fclose(output);
   free(outputFileName);
