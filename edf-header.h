@@ -52,5 +52,13 @@
     char* reserved;
   } DynamicHeader;
 
+  // functions
+
+  /**
+  * Initialise the static header.
+  * Each field is initialised with spaces for the length of the field.
+  */
+  StaticHeader* initialiseStaticHeader();
+
 #endif /* EDFHEADER_H */
 
