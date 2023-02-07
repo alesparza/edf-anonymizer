@@ -65,5 +65,16 @@
   */
   StaticHeader* freeStaticHeader(StaticHeader* staticHeader);
 
+  /**
+  * Initialise the static header.
+  * Each field is initialised with spaces for the length of the field.
+  */
+  DynamicHeader* initialiseDynamicHeader();
+
+  /**
+  * Frees all the data in the static header.
+  */
+  DynamicHeader* freeDynamicHeader(DynamicHeader* dynamicHeader);
+
 #endif /* EDFHEADER_H */
 

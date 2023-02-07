@@ -45,3 +45,44 @@ StaticHeader* freeStaticHeader(StaticHeader* staticHeader) {
   return NULL;
 }
 
+DynamicHeader* initialiseDynamicHeader() {
+  DynamicHeader* header = malloc(sizeof(DynamicHeader));
+  header->label = malloc(HEADER_VERSION_LENGTH * sizeof(char));
+  memset(header->label, ' ', HEADER_VERSION_LENGTH);
+  header->transducerType = malloc(HEADER_LOCAL_PATIENT_IDENTIFICATION_LENGTH * sizeof(char));
+  memset(header->transducerType, ' ', HEADER_LOCAL_PATIENT_IDENTIFICATION_LENGTH);
+  header->physicalDimension = malloc(HEADER_LOCAL_RECORDING_IDENTIFICATION_LENGTH * sizeof(char));
+  memset(header->physicalDimension, ' ', HEADER_LOCAL_RECORDING_IDENTIFICATION_LENGTH);
+  header->physicalMin = malloc(HEADER_STARTDATE_RECORDING_LENGTH * sizeof(char));
+  memset(header->physicalMin, ' ', HEADER_STARTDATE_RECORDING_LENGTH);
+  header->physicalMax = malloc(HEADER_STARTTIME_RECORDING_LENGTH * sizeof(char));
+  memset(header->physicalMax, ' ', HEADER_STARTTIME_RECORDING_LENGTH);
+  header->digitalMin = malloc(HEADER_TOTAL_BYTES_LENGTH * sizeof(char));
+  memset(header->digitalMin, ' ', HEADER_TOTAL_BYTES_LENGTH);
+  header->digitalMax = malloc(HEADER_RESERVED * sizeof(char));
+  memset(header->digitalMax, ' ', HEADER_RESERVED);
+  header->prefiltering = malloc(HEADER_NUMBER_DATA_RECORDS_LENGTH * sizeof(char));
+  memset(header->prefiltering, ' ', HEADER_NUMBER_DATA_RECORDS_LENGTH);
+  header->numSamples = malloc(HEADER_DATA_DURATION_LENGTH * sizeof(char));
+  memset(header->numSamples, ' ', HEADER_DATA_DURATION_LENGTH);
+  header->reserved = malloc(HEADER_NUMBER_SIGNALS_LENGTH * sizeof(char));
+  memset(header->reserved, ' ', HEADER_NUMBER_SIGNALS_LENGTH);
+  return header;
+}
+
+DynamicHeader* freeDynamicHeader(DynamicHeader* dynamicHeader) {
+  free(dynamicHeader->label);
+  free(dynamicHeader->transducerType);
+  free(dynamicHeader->physicalDimension);
+  free(dynamicHeader->physicalMin);
+  free(dynamicHeader->physicalMax);
+  free(dynamicHeader->digitalMin);
+  free(dynamicHeader->digitalMax);
+  free(dynamicHeader->prefiltering);
+  free(dynamicHeader->numSamples);
+  free(dynamicHeader->reserved);
+  free(dynamicHeader);
+
+  return NULL;
+}
+
