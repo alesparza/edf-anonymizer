@@ -27,6 +27,11 @@ void printVerboseHelp();
 char* getInputName();
 
 /**
+* Reads the static portion of the header into memory
+*/
+void readStaticHeader(StaticHeader* header, FILE* input);
+
+/**
 * Sets the output filename.
 * 
 * If the input is test.edf, then the output is test_deid.edf
