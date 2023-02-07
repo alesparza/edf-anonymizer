@@ -60,5 +60,10 @@
   */
   StaticHeader* initialiseStaticHeader();
 
+  /**
+  * Frees all the data in the static header.
+  */
+  StaticHeader* freeStaticHeader(StaticHeader* staticHeader);
+
 #endif /* EDFHEADER_H */
 

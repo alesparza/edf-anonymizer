@@ -29,3 +29,18 @@ StaticHeader* initialiseStaticHeader() {
   return header;
 }
 
+StaticHeader* freeStaticHeader(StaticHeader* staticHeader) {
+  free(staticHeader->version);
+  free(staticHeader->localPatientIdentification);
+  free(staticHeader->localRecordingIdentification);
+  free(staticHeader->startDate);
+  free(staticHeader->startTime);
+  free(staticHeader->totalBytes);
+  free(staticHeader->reserved);
+  free(staticHeader->numDataRecords);
+  free(staticHeader->dataDuration);
+  free(staticHeader->numSignals);
+
+  return NULL;
+}
+
