@@ -42,7 +42,7 @@
   typedef struct DYNAMIC_HEADER_STRUCT {
     char* label;
     char* transducerType;
-    char* physicalDimention;
+    char* physicalDimension;
     char* physicalMin;
     char* physicalMax;
     char* digitalMin;
