@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "edf-anonymizer.h"
+#include "edf-header.h"
 #include "mini-hexdump.h"
 
 void printHelp() {
