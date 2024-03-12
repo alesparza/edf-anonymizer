@@ -4,6 +4,12 @@
 #include "edf-anonymizer.h"
 #include "mini-hexdump.h"
 
+void printAndExit(int exitCode) {
+  printf("Press ENTER to quit...\n");
+  fgetc(stdin);
+  exit(exitCode);
+}
+
 void printHelp() {
   printf("Usage:\tedf-anonymizer -h|-H\n");
   printf("\tedf-anonymizer [-d|-s] [-r] [-i filename]\n");
@@ -13,7 +19,7 @@ void printHelp() {
   printf("\t-d:  Enable Detail Mode.  Prompt for the four local patient identification fields\n");
   printf("\t-s:  Enable Simple Mode.  Single prompt for the local patient identification (default)\n");
   printf("\t-r:  Review Mode.  Do not anonymize data, just print the header\n");
-  printf("\t-i filename:  input file name.  The expected format is .edf\n");
+  printf("\t-i <filename>:  input file name.  The expected format is .edf\n");
 }
 
 void printVerboseHelp() {
@@ -36,7 +42,7 @@ char* setOutputFilename(char* inputFileName) {
   char* extensionIndex = strstr(outputFileName, EDF_EXTENSION);
   if (extensionIndex == NULL) {
     printf("Can't find .edf extension, unable to create output file\n");
-    exit(1);
+    return NULL;
   }
   strncpy(extensionIndex, DEID_EDF_EXTENSION, strlen(DEID_EDF_EXTENSION) + 1);  // copies new extension to filename
   printf("Set output filename to %s\n", outputFileName);
@@ -76,7 +82,7 @@ void checkLength(char* data) {
 int main(int argc, char **argv) {
   if (argc < MINIMUM_ARGUMENTS) {
     printHelp();
-    exit(1);
+    printAndExit(1);
   }
 
   // flags for various arguments
@@ -92,7 +98,7 @@ int main(int argc, char **argv) {
       i++;
       if (argv[i] == NULL) {
         printHelp();
-        exit(1);
+        printAndExit(1);
       }
       char* tempName = calloc(BUFFER_SIZE, sizeof(char));
       strncpy(tempName, argv[i], BUFFER_SIZE);
@@ -102,12 +108,12 @@ int main(int argc, char **argv) {
 
     if (strcmp("-h", argv[i]) == 0) {
       printHelp();
-      exit(1);
+      printAndExit(1);
     }
 
     if (strcmp("-H", argv[i]) == 0) {
       printVerboseHelp();
-      exit(1);
+      printAndExit(1);
     }
 
     if (strcmp("-r", argv[i]) == 0) {
@@ -130,7 +136,7 @@ int main(int argc, char **argv) {
   if (isSimple && isDetail) {
     printf("Cannot request Simple and Detail mode\n");
     printHelp();
-    exit(1);
+    printAndExit(1);
   }
 
   // ensure we have some kind of filename
@@ -141,11 +147,14 @@ int main(int argc, char **argv) {
   // print the current headers, exit immediately if in Review Mode
   miniHexDump(inputFileName, HEADER_LENGTH);
   if (isReview) {
-    exit(0);
+    printAndExit(0);
   }
 
   // Start anonymizing the data
   char* outputFileName = setOutputFilename(inputFileName);
+  if (outputFileName == NULL) {
+    printAndExit(1);
+  }
   char* newData = calloc(BUFFER_SIZE, sizeof(char));
 
   // Detail Mode; ask for each field individually
@@ -226,6 +235,8 @@ int main(int argc, char **argv) {
   fclose(output);
   free(outputFileName);
   free(inputFileName);
-
+  
+  printf("Press ENTER to close\n");
+  fgetc(stdin);
   return 0;
 }
