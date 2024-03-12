@@ -1,14 +1,13 @@
 #ifndef EDFANONYMIZE_H
 #define EDFANONYMIZE_H
 
+#include "edf-header.h"
+
 #define DEID_FILE_SUFFIX "_deid"
 #define EDF_EXTENSION ".edf"
 #define DEID_EDF_EXTENSION "_deid.edf"
 #define MINIMUM_ARGUMENTS 1
-#define HEADER_LENGTH 16
-#define LOCAL_PATIENT_IDENFITICATION_LENGTH 80
 #define BUFFER_SIZE 1024
-#define VERSION_LENGTH 8
 
 
 /**
@@ -26,6 +25,11 @@ void printVerboseHelp();
 * Gets the input file name from the user
 */
 char* getInputName();
+
+/**
+* Reads the static portion of the header into memory
+*/
+void readStaticHeader(StaticHeader* header, FILE* input);
 
 /**
 * Sets the output filename.
