@@ -50,4 +50,9 @@ char* appendPromptResponse(char* currentResponse);
 */
 void checkLength(char* data);
 
+/**
+* Prints "Exiting..., waits for user to press key, then exits with code
+*/
+void printAndExit(int exitCode);
+
 #endif /* EDFANONYMIZE_H */
