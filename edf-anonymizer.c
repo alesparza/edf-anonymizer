@@ -13,7 +13,7 @@ void printHelp() {
   printf("\t-d:  Enable Detail Mode.  Prompt for the four local patient identification fields\n");
   printf("\t-s:  Enable Simple Mode.  Single prompt for the local patient identification (default)\n");
   printf("\t-r:  Review Mode.  Do not anonymize data, just print the header\n");
-  printf("\t-i filename:  input file name.  The expected format is .edf\n");
+  printf("\t-i <filename>:  input file name.  The expected format is .edf\n");
 }
 
 void printVerboseHelp() {
