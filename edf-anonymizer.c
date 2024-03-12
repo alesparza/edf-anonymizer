@@ -226,6 +226,8 @@ int main(int argc, char **argv) {
   fclose(output);
   free(outputFileName);
   free(inputFileName);
-
+  
+  printf("Press any key to close\n");
+  fgetc(stdin);
   return 0;
 }
