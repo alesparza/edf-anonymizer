@@ -21,6 +21,8 @@ void miniHexDump(char* filename, int maxLines) {
   FILE* file = fopen(filename, "rb");
   if (file == NULL) {
     printf("Error opening file, is the filename correct? (tried %s)\n", filename);
+    printf("Exiting...\n");
+    fgetc(stdout);
     exit(1);
   }
 
