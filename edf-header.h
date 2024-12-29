@@ -78,6 +78,7 @@
 
   /**
   * Initialise the static header.
+  * It is "static" becasue the size is always 256 bytes.
   * Each field is initialised with spaces for the length of the field.
   */
   StaticHeader* initialiseStaticHeader();
@@ -88,7 +89,8 @@
   StaticHeader* freeStaticHeader(StaticHeader* staticHeader);
 
   /**
-  * Initialise the static header.
+  * Initialise the dynamic header.
+  * It is "dynamic" because the size changes depending on how many signals exist in the file.
   * Each field is initialised with spaces for the length of the field.
   */
   DynamicHeader* initialiseDynamicHeader(int signalCount);
