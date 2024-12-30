@@ -2,3 +2,5 @@
 edf-anonymizer
 *.edf
 *.exe
+
+.vscode
