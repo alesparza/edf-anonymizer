@@ -1,6 +1,6 @@
-#ifndef EDF-ANONYMIZER_H
-#define EDF-ANONYMIZER_H
+#ifndef EDF_ANONYMIZER_H
+#define EDF_ANONYMIZER_H
 
 
 
-#endif /* ANONYMIZER_H */
+#endif /* EDF_ANONYMIZER_H */
