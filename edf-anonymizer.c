@@ -2,5 +2,8 @@
 #include "commandline.h"
 
 int main() {
-    
+    printWelcome();
+    printPrompt();
+
+
 }
