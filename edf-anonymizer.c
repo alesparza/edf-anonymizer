@@ -29,7 +29,7 @@ void writeFile(FileManager* fileManager) {
 
   // write the local patient info data
   int buffer[BUFFER_SIZE];
-  fread(buffer, HEADER_LOCAL_PATIENT_IDENTIFICATION_LENGTH, sizeof(char), input); // not actually using this data, just moving the file pointer //TODO: replace with fseek() 
+  fseek(input, HEADER_LOCAL_PATIENT_IDENTIFICATION_LENGTH, SEEK_CUR); // skip reading this from the file since it is modified
   fwrite(fileManager->staticHeader->localPatientIdentification, HEADER_LOCAL_PATIENT_IDENTIFICATION_LENGTH, sizeof(char), output);
 
   //TODO: write the header sections individually, then move the input file 256 bytes and copy the rest of the data
