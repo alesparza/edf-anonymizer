@@ -33,4 +33,9 @@ void printFilenameInput();
  */
 void printFileUnopenable(char* filename);
 
+/**
+ * Print a message indicating successful load.
+ */
+void printSuccessfulLoad(char* filename);
+
 #endif /* MESSAGES_H */

@@ -23,3 +23,7 @@ void printFilenameInput() {
 void printFileUnopenable(char* filename) {
     printf("Unable to open file '%s'.  Please check spelling and extension inclusion.\n", filename);
 }
+
+void printSuccessfulLoad(char* filename) {
+    printf("Successfully loaded data from '%s'!\n", filename);
+}

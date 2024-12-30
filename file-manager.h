@@ -15,6 +15,8 @@
 typedef struct {
     char* filename;
     FILE* file;
+    StaticHeader* staticHeader;
+    DynamicHeader* dynamicHeader;
 
 } FileManager;
 
@@ -32,5 +34,10 @@ void freeFileManager(FileManager* fileManager);
  * Loads a file into memory.
  */
 void loadFile(FileManager* fileManager);
+
+/**
+ * Reads the static header section of the input into memory.
+ */
+void readStaticHeader(StaticHeader* header, FILE* input);
 
 #endif /* FILEMANAGER_H */
