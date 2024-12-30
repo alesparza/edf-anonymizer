@@ -2,12 +2,18 @@
 #define COMMANDLINE_H
 
 #include <stdio.h>
+#include <string.h>
 
 /*
 * Prompt stuff.
 */
 
 #define PROMPT_STRING "==> "
+
+/**
+ * Gets input from the user.
+ */
+char* getInput();
 
 /**
  * Print the prompt string.
