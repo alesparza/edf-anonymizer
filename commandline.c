@@ -25,6 +25,7 @@ void printMain(char* filename) {
     printf("\t%d %s\n", EXIT_VAL, EXIT_STRING);
     printf("\t%d %s\n", LOAD_VAL, LOAD_STRING);
     if (filename != NULL) {
+        printf("\t%d %s\n", VIEW_VAL, VIEW_STRING);
         printf("\t%d %s\n", MODIFY_VAL, MODIFY_STRING);
         printf("\t%d %s\n", SAVE_VAL, SAVE_STRING);
     }

@@ -30,19 +30,22 @@ int main() {
                 printf("case 2: load file\n");
                 loadFile(fileManager);
                 break;
+            case VIEW_VAL:
+                printf("case 3: view contents unimplemented\n");
+                break;
             case MODIFY_VAL:
                 if (fileManager->filename == NULL) {
                     printNoOpenFile();
                     break;
                 }
-                printf("case 3: modify header\n");
+                printf("modify header unimplemented\n");
                 break;
             case SAVE_VAL:
                 if (fileManager->filename == NULL) {
                     printNoOpenFile();
                     break;
                 }
-                printf("case 4: write file\n");
+                printf("write file unimplemented\n");
                 break;
             default:
                 printUnknownOption(selection);

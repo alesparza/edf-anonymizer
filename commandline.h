@@ -11,10 +11,13 @@
 #define EXIT_VAL 1
 #define LOAD_STRING "Load a .edf file"
 #define LOAD_VAL 2
+#define VIEW_STRING "View header contents"
+#define VIEW_VAL 3
 #define MODIFY_STRING "Modify the header"
-#define MODIFY_VAL 3
+#define MODIFY_VAL 4
 #define SAVE_STRING "Write to a new file"
-#define SAVE_VAL 4
+#define SAVE_VAL 5
+
 
 #define PROMPT_STRING "==> "
 #define COMMANDLINE_BUFFER_SIZE 1024
