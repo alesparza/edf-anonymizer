@@ -29,6 +29,12 @@ char* getInput();
 void printPrompt();
 
 /**
+ * Validates that an input is numeric.
+ * Returns 0 is not a number, otherwise returns the number.
+ */
+int validateNumericInput(char* input);
+
+/**
  * Prints the main loop options.
  */
 void printMain(char* filename);

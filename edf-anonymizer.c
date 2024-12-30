@@ -14,13 +14,8 @@ int main() {
         char* response = getInput();
 
         // process the response to be sure it is a number
-        char** check = &response;
-        int selection = strtol(response, check, 10);
-        if (*response != '\0' && **check == '\0') {
-            printNotNumber(response);
-            continue;
-        }
-        if (selection == 0 && check == &response) {
+        int selection = validateNumericInput(response);
+        if (selection == 0) {
             printNotNumber(response);
             continue;
         }

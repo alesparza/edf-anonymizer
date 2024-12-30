@@ -30,6 +30,17 @@ void printMain(char* filename) {
     }
 }
 
+int validateNumericInput(char* input) {
+        char** check = &input;
+        int selection = strtol(input, check, 10);
+        if (*input != '\0' && **check == '\0') {
+            return 0;
+        }
+        if (selection == 0 && check == &input) {
+            return 0;
+        }
+        return selection;
+}
 
 void printFilenameInput() {
     printf("Please enter the filename to load.\n");
