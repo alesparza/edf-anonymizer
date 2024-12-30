@@ -1,6 +1,6 @@
 CC := gcc # NTS overwrite with x86_64-w64-mingw32-gcc to cross-compile to 64bit Windows
 CFLAGS := -g -Wall
-OBJECTS := mini-hexdump.o edf-anonymizer.o edf-header.o
+OBJECTS := mini-hexdump.o edf-anonymizer.o edf-header.o commandline.o
 
 .PHONY: all clean
 
