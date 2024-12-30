@@ -46,6 +46,7 @@ void loadFile(FileManager* fileManager) {
     fileManager->staticHeader = initialiseStaticHeader();
     readStaticHeader(fileManager->staticHeader, fileManager->file);
     // fileManager->dynamicHeader = initialiseDynamicHeader(); // this isn't actually necessary for anonymization
+    rewind(fileManager->file); // have to reset this now to avoid issues copying later
     printSuccessfulLoad(fileManager->filename);
 }
 
