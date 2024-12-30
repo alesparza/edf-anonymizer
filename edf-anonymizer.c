@@ -1,5 +1,6 @@
 #include "edf-anonymizer.h"
 #include "commandline.h"
+#include "messages.h"
 
 int main() {
     char* filename = NULL;
@@ -51,6 +52,4 @@ int main() {
                 break;
         }
     }
-
-
 }
