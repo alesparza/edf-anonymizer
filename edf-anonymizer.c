@@ -1,7 +1,62 @@
 #include "edf-anonymizer.h"
-#include "file-manager.h"
-#include "commandline.h"
-#include "messages.h"
+
+void writeFile(FileManager* fileManager) {
+  printf("Writing file (this can take a bit for large files)\n");
+  fflush(stdout);
+
+  FILE* input = fileManager->file;
+  if (input == NULL) {
+    printf("ERROR: (unexpected) file is NULL");
+    return;
+  }
+  rewind(input); // necessary in case it was moved from the start
+  char* outputFilename = getOutputFilename(fileManager->filename);
+  if (outputFilename == NULL) {
+    printf("ERROR: (unexpected) returned NULL for getOutputFilename\n");
+    return;
+  }
+  FILE* output = fopen(outputFilename, "wb");
+  if (output == NULL) {
+    printf("ERROR: unable to open output file\n");
+    free(outputFilename);
+    return;
+  }
+
+  // copy the version; this is the only part before the patient info section
+  int version[HEADER_VERSION_LENGTH];
+  fread(version, HEADER_VERSION_LENGTH, sizeof(char), input);
+  fwrite(version, HEADER_VERSION_LENGTH, sizeof(char), output);
+
+  // write the local patient info data
+  int buffer[BUFFER_SIZE];
+  fread(buffer, HEADER_LOCAL_PATIENT_IDENTIFICATION_LENGTH, sizeof(char), input); // not actually using this data, just moving the file pointer //TODO: replace with fseek() 
+  fwrite(fileManager->staticHeader->localPatientIdentification, HEADER_LOCAL_PATIENT_IDENTIFICATION_LENGTH, sizeof(char), output);
+
+  //TODO: write the header sections individually, then move the input file 256 bytes and copy the rest of the data
+
+  // write the rest of the original file
+  memset(buffer, '\0', sizeof(buffer));
+  while ((fread(buffer, sizeof(buffer), sizeof(char), input)) != 0) {
+    fwrite(buffer, sizeof(buffer), sizeof(char), output);
+    memset(buffer, '\0', sizeof(buffer));
+  }
+  printf("Done writing the output file %s\n", outputFilename);
+  free(outputFilename);
+}
+
+char* getOutputFilename(char* inputFileName) {
+  // copy the current filename to the new buffer, then add the appropriate extension
+  char* outputFileName = malloc(sizeof(char) * (strlen(inputFileName) + strlen(DEID_FILE_SUFFIX) + 1));
+  strncpy(outputFileName, inputFileName, strlen(inputFileName) + 1);
+  char* extensionIndex = strstr(outputFileName, EDF_EXTENSION);
+  if (extensionIndex == NULL) {
+    printf("Can't find .edf extension, unable to create output file\n");
+    return NULL;
+  }
+  strncpy(extensionIndex, DEID_EDF_EXTENSION, strlen(DEID_EDF_EXTENSION) + 1);  // copies new extension to filename
+  printf("Set output filename to %s\n", outputFileName);
+  return outputFileName;
+}
 
 int main() {
     FileManager* fileManager = initialiseFileManager();
@@ -48,7 +103,7 @@ int main() {
                     printNoOpenFile();
                     break;
                 }
-                printf("write file unimplemented\n");
+                writeFile(fileManager);
                 break;
             default:
                 printUnknownOption(selection);
