@@ -10,6 +10,7 @@
 #define EXIT_STRING "Exit"
 #define EXIT_VAL 1
 #define LOAD_STRING "Load a .edf file"
+#define LOAD2_STRING "Load a different .edf file"
 #define LOAD_VAL 2
 #define VIEW_STRING "View header contents"
 #define VIEW_VAL 3
