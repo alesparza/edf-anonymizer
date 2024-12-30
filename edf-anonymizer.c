@@ -1,15 +1,15 @@
 #include "edf-anonymizer.h"
+#include "file-manager.h"
 #include "commandline.h"
 #include "messages.h"
 
 int main() {
-    char* filename = NULL;
-    FILE* file = NULL;
+    FileManager* fileManager = initialiseFileManager();
     printWelcome();
 
     // main loop: print options, process input, call handler
     while(1) {
-        printMain(filename);
+        printMain(fileManager->filename);
         printPrompt();
         char* response = getInput();
 
@@ -23,20 +23,21 @@ int main() {
         // handle the input
         switch (selection) {
             case EXIT_VAL:
-                printf("Bye bye!");
+                printf("Bye bye!\n");
+                freeFileManager(fileManager);
                 exit(0);
             case LOAD_VAL:
                 printf("case 2: load file\n");
                 break;
             case MODIFY_VAL:
-                if (filename == NULL) {
+                if (fileManager->filename == NULL) {
                     printNoOpenFile();
                     break;
                 }
                 printf("case 3: modify header\n");
                 break;
             case SAVE_VAL:
-                if (filename == NULL) {
+                if (fileManager->filename == NULL) {
                     printNoOpenFile();
                     break;
                 }
