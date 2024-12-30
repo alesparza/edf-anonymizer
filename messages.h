@@ -23,4 +23,9 @@ void printNotNumber(char* string);
  */
 void printNoOpenFile();
 
+/**
+ * Print a message asking for a filename.
+ */
+void printFilenameInput();
+
 #endif /* MESSAGES_H */

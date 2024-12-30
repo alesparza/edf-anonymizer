@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "messages.h"
 
 // values for main menu options and values
 #define EXIT_STRING "Exit"

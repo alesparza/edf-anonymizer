@@ -15,3 +15,7 @@ void printUnknownOption(int option) {
 void printNoOpenFile() {
     printf("ERROR: No file currently open!  Please load a file first.");
 }
+
+void printFilenameInput() {
+    printf("Please enter the filename to load.\n");
+}

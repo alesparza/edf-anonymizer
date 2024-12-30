@@ -42,6 +42,3 @@ int validateNumericInput(char* input) {
         return selection;
 }
 
-void printFilenameInput() {
-    printf("Please enter the filename to load.\n");
-}
