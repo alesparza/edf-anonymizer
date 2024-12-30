@@ -21,7 +21,7 @@ void printMain(char* filename) {
     if (filename != NULL) {
         printf("Current open file is %s\n", filename);
     }
-    printf("Please select an option:\n");
+    printf("\nPlease select an option:\n");
     printf("\t%d %s\n", EXIT_VAL, EXIT_STRING);
     if (filename == NULL) printf("\t%d %s\n", LOAD_VAL, LOAD_STRING);
     if (filename != NULL) {
