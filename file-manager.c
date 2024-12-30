@@ -24,8 +24,13 @@ void loadFile(FileManager* fileManager) {
     assert(fileManager != NULL); // this should never happen
     printFilenameInput();
     printPrompt();
-    fileManager->filename = getInput();
+    // if there is already a filename loaded, clear it
+    if (fileManager->filename != NULL) {
+        free(fileManager->filename);
+    }
 
+    // get the new filename and read it
+    fileManager->filename = getInput();
     if (fileManager->filename != NULL) {
         fileManager->file = fopen(fileManager->filename, "rb");
     }
