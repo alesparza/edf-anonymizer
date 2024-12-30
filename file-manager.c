@@ -15,3 +15,18 @@ void freeFileManager(FileManager* fileManager) {
     if (fileManager->file != NULL) fclose(fileManager->file);
     free(fileManager);
 }
+
+void loadFile(FileManager* fileManager) {
+    assert(fileManager != NULL);
+    printFilenameInput();
+    printPrompt();
+    fileManager->filename = getInput();
+    if (fileManager->filename != NULL) {
+        fileManager->file = fopen(fileManager->filename, "rb");
+    }
+    if (fileManager->file == NULL) {
+        printFileUnopenable(fileManager->filename);
+        free(fileManager->filename);
+        fileManager->filename = NULL;
+    }
+}

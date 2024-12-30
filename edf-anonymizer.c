@@ -28,6 +28,7 @@ int main() {
                 exit(0);
             case LOAD_VAL:
                 printf("case 2: load file\n");
+                loadFile(fileManager);
                 break;
             case MODIFY_VAL:
                 if (fileManager->filename == NULL) {

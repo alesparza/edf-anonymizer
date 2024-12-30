@@ -28,4 +28,9 @@ void printNoOpenFile();
  */
 void printFilenameInput();
 
+/**
+ * Print a message indicating the file could not be opened. 
+ */
+void printFileUnopenable(char* filename);
+
 #endif /* MESSAGES_H */

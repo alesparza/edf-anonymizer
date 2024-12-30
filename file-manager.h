@@ -3,8 +3,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 #include "edf-header.h"
 #include "messages.h"
+#include "commandline.h"
 
 
 /**
@@ -25,5 +27,10 @@ FileManager* initialiseFileManager();
  * Frees the file manager struct.
  */
 void freeFileManager(FileManager* fileManager);
+
+/**
+ * Loads a file into memory.
+ */
+void loadFile(FileManager* fileManager);
 
 #endif /* FILEMANAGER_H */

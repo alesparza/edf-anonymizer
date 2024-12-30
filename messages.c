@@ -19,3 +19,7 @@ void printNoOpenFile() {
 void printFilenameInput() {
     printf("Please enter the filename to load.\n");
 }
+
+void printFileUnopenable(char* filename) {
+    printf("Unable to open file '%s'.  Please check spelling and extension inclusion.\n", filename);
+}
