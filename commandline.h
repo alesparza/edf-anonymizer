@@ -3,10 +3,17 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
-/*
-* Prompt stuff.
-*/
+// values for menu options and values
+#define EXIT_STRING "Exit"
+#define EXIT_VAL 1
+#define LOAD_STRING "Load a .edf file"
+#define LOAD_VAL 2
+#define MODIFY_STRING "Modify the header"
+#define MODIFY_VAL 3
+#define SAVE_STRING "Write to a new file"
+#define SAVE_VAL 4
 
 #define PROMPT_STRING "==> "
 
@@ -20,33 +27,28 @@ char* getInput();
  */
 void printPrompt();
 
-
-/*
-* Welcome message stuff 
-*/
-
-#define WELCOME_EXIT_STRING "Exit"
-#define WELCOME_EXIT_VAL 0
-#define WELCOME_LOAD_STRING "Load a .edf file"
-#define WELCOME_LOAD_VAL 1
-
 /**
- * Print a welcoming string to get started.
+ * Print a welcoming message.
  */
 void printWelcome();
 
-
-
-
-
+/**
+ * Prints the main loop options.
+ */
+void printMain(char* filename);
 
 /*
-* Miscellaneous messages
+* Error messages
 */
 
 /**
- * Print a retry message, and indicate which option was not valid.
+ * Print a message indicating the input is not a valid option, and indicate which option was not valid.
  */
-void printRetry(int option);
+void printUnknownOption(int option);
+
+/**
+ * Print a message indicating the input is not a number.
+ */
+void printNotNumber(char* string);
 
 #endif /* COMMANDLINE_H */
