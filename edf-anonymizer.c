@@ -27,11 +27,14 @@ int main() {
                 freeFileManager(fileManager);
                 exit(0);
             case LOAD_VAL:
-                printf("case 2: load file\n");
                 loadFile(fileManager);
                 break;
             case VIEW_VAL:
-                printf("case 3: view contents unimplemented\n");
+                if (fileManager->filename == NULL) {
+                    printNoOpenFile();
+                    break;
+                }
+                miniHexDump(fileManager->filename, HEADER_ROWS);
                 break;
             case MODIFY_VAL:
                 if (fileManager->filename == NULL) {
