@@ -12,7 +12,11 @@ char* getInput() {
     if ((length > 0) && (buffer[length - 1]) == '\n') {
         buffer[length - 1] = '\0';
     }
-    char* ret = malloc(strlen(buffer) * sizeof(char) + 1);
+    length = strlen(buffer);
+    if ((length > 0) && (buffer[length - 1]) == '\r') {
+        buffer[length - 1] = '\0';
+    }
+    char* ret = calloc(strlen(buffer), sizeof(char) + 1);
     strncpy(ret, buffer, strlen(buffer));
     return ret;
 }
