@@ -40,4 +40,24 @@ void loadFile(FileManager* fileManager);
  */
 void readStaticHeader(StaticHeader* header, FILE* input);
 
+/**
+ * Updates the Patient Identification section.
+ */
+int updatePatientIdentification(StaticHeader* header, char* data);
+
+/**
+ * Updates the Recording Identification section.
+ */
+int updateRecordingIdentification(StaticHeader* header, char* data);
+
+/**
+ * Updates the Recording State Date section.
+ */
+int updateRecordingStartDate(StaticHeader* header, char* data);
+
+/**
+ * Updates the Recording Start Time section.
+ */
+int updateRecordingStartTime(StaticHeader* header, char* data);
+
 #endif /* FILEMANAGER_H */

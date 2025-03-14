@@ -44,3 +44,12 @@ int validateNumericInput(char* input) {
         return selection;
 }
 
+void printHeaderOptions() {
+    printf("Choose a field to modify:\n");
+    printf("\t%d %s\n", MOD_CANCEL_VAL, MOD_CANCEL_STRING);
+    printf("\t%d %s\n", MOD_LPI_VAL, MOD_LPI_STRING);
+    printf("\t%d %s\n", MOD_LRI_VAL, MOD_LRI_STRING);
+    printf("\t%d %s\n", MOD_LRSD_VAL, MOD_LRSD_STRING);
+    printf("\t%d %s\n", MOD_LRST_VAL, MOD_LRST_STRING);
+}
+

@@ -19,6 +19,16 @@
 #define SAVE_STRING "Write to a new file"
 #define SAVE_VAL 5
 
+#define MOD_CANCEL_STRING "Cancel"
+#define MOD_CANCEL_VAL 1
+#define MOD_LPI_STRING "Local Patient Identification"
+#define MOD_LPI_VAL 2
+#define MOD_LRI_STRING "Local Recording Identification"
+#define MOD_LRI_VAL 3
+#define MOD_LRSD_STRING "Local Recording Start Date"
+#define MOD_LRSD_VAL 4
+#define MOD_LRST_STRING "Local Recording Start TIme"
+#define MOD_LRST_VAL 5
 
 #define PROMPT_STRING "==> "
 #define COMMANDLINE_BUFFER_SIZE 1024
@@ -38,6 +48,11 @@ void printPrompt();
  * Returns 0 is not a number, otherwise returns the number.
  */
 int validateNumericInput(char* input);
+
+/**
+ * Prints header modification options
+ */
+void printHeaderOptions();
 
 /**
  * Prints the main loop options.

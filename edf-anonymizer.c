@@ -31,6 +31,12 @@ void writeFile(FileManager* fileManager) {
   int buffer[BUFFER_SIZE];
   fseek(input, HEADER_LOCAL_PATIENT_IDENTIFICATION_LENGTH, SEEK_CUR); // skip reading this from the file since it is modified
   fwrite(fileManager->staticHeader->localPatientIdentification, HEADER_LOCAL_PATIENT_IDENTIFICATION_LENGTH, sizeof(char), output);
+  fseek(input, HEADER_LOCAL_RECORDING_IDENTIFICATION_LENGTH, SEEK_CUR);
+  fwrite(fileManager->staticHeader->localRecordingIdentification, HEADER_LOCAL_RECORDING_IDENTIFICATION_LENGTH, sizeof(char), output);
+  fseek(input, HEADER_STARTDATE_RECORDING_LENGTH, SEEK_CUR);
+  fwrite(fileManager->staticHeader->startDate, HEADER_STARTDATE_RECORDING_LENGTH, sizeof(char), output);
+  fseek(input, HEADER_STARTTIME_RECORDING_LENGTH, SEEK_CUR);
+  fwrite(fileManager->staticHeader->startTime, HEADER_STARTTIME_RECORDING_LENGTH, sizeof(char), output);
 
   //TODO: write the header sections individually, then move the input file 256 bytes and copy the rest of the data
 
@@ -96,7 +102,38 @@ int main() {
                     printNoOpenFile();
                     break;
                 }
-                printf("modify header unimplemented\n");
+                printHeaderOptions();
+                printPrompt();
+                char* headerOption = getInput();
+                int headerSelection = validateNumericInput(headerOption);
+                if (headerSelection == 0) {
+                  printNotNumber(response);
+                  continue;
+                }
+                if (headerSelection == MOD_CANCEL_VAL) {
+                  continue;
+                }
+                
+                printf("Enter replacement data:\n");
+                char* data = getInput();
+                switch(headerSelection) {
+                  case MOD_LPI_VAL:
+                    updatePatientIdentification(fileManager->staticHeader, data);
+                    continue;
+                  case MOD_LRI_VAL:
+                    updateRecordingIdentification(fileManager->staticHeader, data);
+                    continue;
+                  case MOD_LRSD_VAL:
+                    updateRecordingStartDate(fileManager->staticHeader, data);
+                    continue;
+                  case MOD_LRST_VAL:
+                    updateRecordingStartTime(fileManager->staticHeader, data);
+                    continue;
+                  default:
+                    printf("Not a valid option\n");
+                    continue;
+                }
+
                 break;
             case SAVE_VAL:
                 if (fileManager->filename == NULL) {
