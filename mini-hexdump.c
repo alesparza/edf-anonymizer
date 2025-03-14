@@ -13,10 +13,8 @@ void printBinaryRow(int i, FILE* file) {
 void miniHexDump(char* filename, int maxLines) {
   if (filename == NULL) {
     printf("miniHexDump: invalid filename %s\n", filename);
-    exit(1);
+    return;
   }
-
-  printf("Reviewing file %s\n", filename);
 
   FILE* file = fopen(filename, "rb");
   if (file == NULL) {

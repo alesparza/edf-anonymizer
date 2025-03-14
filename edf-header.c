@@ -41,6 +41,7 @@ StaticHeader* initialiseStaticHeader() {
 }
 
 StaticHeader* freeStaticHeader(StaticHeader* staticHeader) {
+  if (staticHeader == NULL) return NULL;
   free(staticHeader->version);
   free(staticHeader->localPatientIdentification);
   free(staticHeader->localRecordingIdentification);
@@ -92,6 +93,7 @@ DynamicHeader* initialiseDynamicHeader(int signalCount) {
 }
 
 DynamicHeader* freeDynamicHeader(DynamicHeader* dynamicHeader) {
+  if (dynamicHeader == NULL) return NULL;
   free(dynamicHeader->label);
   free(dynamicHeader->transducerType);
   free(dynamicHeader->physicalDimension);
