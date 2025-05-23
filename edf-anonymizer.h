@@ -9,7 +9,7 @@
 #include "commandline.h"
 #include "messages.h"
 
-#define BUFFER_SIZE 1024
+#define BUFFER_SIZE 1
 #define DEID_FILE_SUFFIX "_deid"
 #define EDF_EXTENSION ".edf"
 #define DEID_EDF_EXTENSION "_deid.edf"
